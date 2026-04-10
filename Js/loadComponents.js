@@ -1,9 +1,12 @@
 async function loadComponent(id, file) {
-  const res = await fetch(file);
-  const data = await res.text();
-  document.getElementById(id).innerHTML = data;
+  try {
+    const res = await fetch("/" + file);
+    const html = await res.text();
+    document.getElementById(id).innerHTML = html;
+  } catch (err) {
+    console.log("Error loading:", file, err);
+  }
 }
 
-// Load header and footer in every page
 loadComponent("header", "components/header.html");
 loadComponent("footer", "components/footer.html");
